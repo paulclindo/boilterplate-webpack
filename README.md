@@ -1,7 +1,6 @@
+# My personal React Boilerplate
 
-# My personal React Boilerplate 
-
-My personal Boilerplate for react project using webpack, graphql and styled components
+My personal Boilerplate for react project using webpack, react and styled components
 
 ### Prerequisites
 

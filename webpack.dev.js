@@ -11,41 +11,42 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].js",
-    publicPath: "http://localhost:9000/",
+    // publicPath: "http://localhost:8080/",
     chunkFilename: "js/[id].[chunkash].js"
   },
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
-    open: true,
-    port: 9000,
     historyApiFallback: true
   },
 
   module: {
     rules: [
-      // {
-      //   test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
-      //   use: {
-      //     loader: "file-loader",
-      //     options: {
-      //       outPath: "assets"
-      //     }
-      //   }
-      // },
+      {
+        test: /\.(jp(e)?g|png|woff(2)?|eot|ttf|svg|mp4|webm|gif)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+              name: "[name].[ext]",
+              outPath: "assets",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+          },
+        ],
+      },
       {
         test: /\.js$/,
         use: "babel-loader",
         exclude: /node_modules/
       },
-      {
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: "graphql-tag/loader"
-      }
-      // {
-      //   test: /\.scss|css$/,
-      //   use: ["style-loader", "css-loader", "sass-loader"]
-      // }
     ]
   },
 
